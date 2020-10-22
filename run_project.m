@@ -38,10 +38,10 @@ clean_project;
 % copies, renames, zips MRI data
 % copies subject tsv and json files
 map_subj_dir;
-map_subj_bold;
+% map_subj_bold;
 % map_subj_physio;
-% map_subj_id_events_log2tsv; 
-% map_subj_mod_events_log2tsv;
+map_subj_id_events_log2tsv; 
+map_subj_mod_events_log2tsv;
 % map_subj_json;
 
 toc

@@ -5,9 +5,6 @@
 %% Univ. of Arkansas for Medical Sciences
 %% Brain Imaging Research Center (BIRC)
 %%
-%% Co-authors: Ivan Messias (2019)
-%%             Kevin Fialkowski (2019)
-%%
 %%========================================
 %%========================================
 
@@ -22,7 +19,6 @@ load('proj.mat');
 %% Create the subjects to be analyzed (possible multiple studies)
 subjs = load_subjs(proj);
 
-%% Preprocess fMRI of each subject in subjects list 
 for i=1:numel(subjs)
 
     %%  Assign file paths
@@ -40,16 +36,16 @@ for i=1:numel(subjs)
     %% ----------------------------------------
     %% Pull Identify 1 log data below
     
-    % Load in design files
-    load([design_path,'run1_design.mat']);
+    %% % Load in design files
+    %% load([design_path,'run1_design.mat']);
     
     % Creat a list of log files for study and subject
-    cmd = ['! ls ',proj.path.raw_data,subj_study,'/logfiles/', ...
+    cmd = ['! ls ',proj.path.raw_data,subj_study,'/logfile/', ...
            subj_study,'_',name,'/logfile_collection*.log > ',tmp_path,subj_study,'_', ...
            name,'_log_list.txt'];
     disp(cmd);
     eval(cmd);
-    
+
     % Extract name of Identify 1
     cmd = ['! sed -n ''1{p;q}'' ',tmp_path,subj_study,'_',name,...
            '_log_list.txt > ',tmp_path,'identify_1_logfile.txt'];
@@ -67,7 +63,8 @@ for i=1:numel(subjs)
     raw_log_data = csvread([tmp_path,'identify_1_log.txt']);
     
     % Pull the logfile's data
-    [id1_log_table] = id_log2tsv(proj,run1_design,raw_log_data);
+    [id1_log_table] = id_log2tsv(proj,raw_log_data,1);
+    id1_log_table
 
     % Transfer table to text file
     file_name = ['sub-',name,'_task-identify1_events.tsv'];
@@ -85,19 +82,20 @@ for i=1:numel(subjs)
     
     % Load in design files
     load([design_path,'run2_design.mat']);
-    
+
     % Creat a list of log files for study and subject
-    cmd = ['! ls ',proj.path.raw_data,subj_study,'/logfiles/', ...
+    cmd = ['! ls ',proj.path.raw_data,subj_study,'/logfile/', ...
            subj_study,'_',name,'/logfile_collection*.log > ',tmp_path,subj_study,'_', ...
            name,'_log_list.txt'];
     disp(cmd);
     eval(cmd);
-    
-    % Extract name of Identify 1
+
+    % Extract name of Identify 2
     cmd = ['! sed -n ''2{p;q}'' ',tmp_path,subj_study,'_',name,...
            '_log_list.txt > ',tmp_path,'identify_2_logfile.txt'];
     disp(cmd);
     eval(cmd);
+
     
     fid = fopen([tmp_path,'identify_2_logfile.txt'],'r');
     filename = fscanf(fid,'%s');
@@ -110,8 +108,9 @@ for i=1:numel(subjs)
     raw_log_data = csvread([tmp_path,'identify_2_log.txt']);
     
     % Pull the logfile's data
-    [id2_log_table] = id_log2tsv(proj,run2_design,raw_log_data);
-    
+    [id2_log_table] = id_log2tsv(proj,raw_log_data,2);
+    id2_log_table    
+
     % Transfer table to text file
     file_name = ['sub-',name,'_task-identify2_events.tsv'];
     func_path = [proj.path.data,'sub-',name,'/func/'];
