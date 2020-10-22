@@ -16,29 +16,13 @@ logger(['************************************************'],proj.path.logfile);
 logger([' Map Subj-level Modulate Event files from Logs  '],proj.path.logfile);
 logger(['************************************************'],proj.path.logfile);
 
-%% ========================================
-%% This script merges three independent logs created
-%% during the rPEP real-time processing.
-%% ========================================
-
 %% Load in path data
 load('proj.mat');
 
 %% Create the subjects to be analyzed (possible multiple studies)
 subjs = load_subjs(proj);
 
-%% ========================================
-%% Preprocess fMRI of each subject in subjects list 
-%% ========================================
-%%
-%% Special Cases ***NOT*** Handled by code (Hand Edit!!!)
-%%
-%% Run 1 (miss-logged feedback)
-
-%% Run 2 (miss-logged feedback)
-%% N/A
-
-for i = 1:1 %numel(subjs)
+for i = 1:numel(subjs)
 
     %%  Assign file paths
     design_path = proj.path.design;  %raw design
@@ -89,39 +73,43 @@ for i = 1:1 %numel(subjs)
     disp(' ');
     disp(' ');
     disp(' ');
-    
-    % Creat a list of log files for study and subject
-    cmd = ['! ls ',proj.path.raw_data,subj_study,'/logfile/', ...
-           subj_study,'_',name,'/logfile_experiment*.log > ',tmp_path,subj_study,'_', ...
-           name,'_log_list.txt'];
-    disp(cmd);
-    eval(cmd);
 
-    % Extract name of Modulate 2
-    cmd = ['! sed -n ''2{p;q}'' ',tmp_path,subj_study,'_',name,...
-           '_log_list.txt > ',tmp_path,'modulate_2_logfile.txt'];
-    disp(cmd);
-    eval(cmd);
-
-    fid = fopen([tmp_path,'modulate_2_logfile.txt'],'r');
-    filename = fscanf(fid,'%s');
-    fclose(fid);
+    if(str2num(name)~=13 & str2num(name)~=28)
     
-    % Read the correct logfile
-    cmd = ['! tail ',filename,' -n +2 > ',tmp_path,'modulate_2_log.txt'];
-    disp(cmd);
-    eval(cmd);
-    raw_log_data = csvread([tmp_path,'modulate_2_log.txt']);
-    
-    % Pull the logfile's data
-    [mod2_log_table] = mod_log2tsv(proj,raw_log_data);
-    mod2_log_table    
+        % Creat a list of log files for study and subject
+        cmd = ['! ls ',proj.path.raw_data,subj_study,'/logfile/', ...
+               subj_study,'_',name,'/logfile_experiment*.log > ',tmp_path,subj_study,'_', ...
+               name,'_log_list.txt'];
+        disp(cmd);
+        eval(cmd);
+        
+        % Extract name of Modulate 2
+        cmd = ['! sed -n ''2{p;q}'' ',tmp_path,subj_study,'_',name,...
+               '_log_list.txt > ',tmp_path,'modulate_2_logfile.txt'];
+        disp(cmd);
+        eval(cmd);
+        
+        fid = fopen([tmp_path,'modulate_2_logfile.txt'],'r');
+        filename = fscanf(fid,'%s');
+        fclose(fid);
+        
+        % Read the correct logfile
+        cmd = ['! tail ',filename,' -n +2 > ',tmp_path,'modulate_2_log.txt'];
+        disp(cmd);
+        eval(cmd);
+        raw_log_data = csvread([tmp_path,'modulate_2_log.txt']);
+        
+        % Pull the logfile's data
+        [mod2_log_table] = mod_log2tsv(proj,raw_log_data);
+        mod2_log_table    
+        
+        % Transfer table to text file
+        file_name = ['sub-',name,'_task-modulate2_events.tsv'];
+        func_path = [proj.path.data,'sub-',name,'/func/'];
+        writetable(mod2_log_table,fullfile(func_path,file_name),...
+                   'FileType','text','Delimiter','\t');
 
-    % Transfer table to text file
-    file_name = ['sub-',name,'_task-modulate2_events.tsv'];
-    func_path = [proj.path.data,'sub-',name,'/func/'];
-    writetable(mod2_log_table,fullfile(func_path,file_name),...
-               'FileType','text','Delimiter','\t');
+    end
 
     % Clean-up
     eval(['! rm ',tmp_path,'*']);
