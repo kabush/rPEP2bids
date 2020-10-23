@@ -33,15 +33,11 @@ try
     cardiac = data(:,1);
     respiratory = data(:,2);
     scr = data(:,3);
-    emg_zygo = data(:,4);
-    emg_corr = data(:,5);
 
     % construct table (full precision)
     physio_table = table(cardiac,...
                    respiratory,...
-                   scr,...
-                   emg_zygo,...
-                   emg_corr);
+                   scr);
 
     % write data to file
     func_path = [proj.path.data,'sub-',name,'/func/'];
@@ -58,5 +54,3 @@ try
 catch
     logger([file_path,' not found!!!'],proj.path.logfile);
 end
-
-physio_table = 0;

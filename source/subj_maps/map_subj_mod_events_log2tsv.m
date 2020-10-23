@@ -1,4 +1,4 @@
- %%========================================
+%%========================================
 %%========================================
 %%
 %% Keith Bush, PhD (2020)
@@ -74,43 +74,39 @@ for i = 1:numel(subjs)
     disp(' ');
     disp(' ');
 
-    if(str2num(name)~=13 & str2num(name)~=28)
+    % Creat a list of log files for study and subject
+    cmd = ['! ls ',proj.path.raw_data,subj_study,'/logfile/', ...
+           subj_study,'_',name,'/logfile_experiment*.log > ',tmp_path,subj_study,'_', ...
+           name,'_log_list.txt'];
+    disp(cmd);
+    eval(cmd);
     
-        % Creat a list of log files for study and subject
-        cmd = ['! ls ',proj.path.raw_data,subj_study,'/logfile/', ...
-               subj_study,'_',name,'/logfile_experiment*.log > ',tmp_path,subj_study,'_', ...
-               name,'_log_list.txt'];
-        disp(cmd);
-        eval(cmd);
-        
-        % Extract name of Modulate 2
-        cmd = ['! sed -n ''2{p;q}'' ',tmp_path,subj_study,'_',name,...
-               '_log_list.txt > ',tmp_path,'modulate_2_logfile.txt'];
-        disp(cmd);
-        eval(cmd);
-        
-        fid = fopen([tmp_path,'modulate_2_logfile.txt'],'r');
-        filename = fscanf(fid,'%s');
-        fclose(fid);
-        
-        % Read the correct logfile
-        cmd = ['! tail ',filename,' -n +2 > ',tmp_path,'modulate_2_log.txt'];
-        disp(cmd);
-        eval(cmd);
-        raw_log_data = csvread([tmp_path,'modulate_2_log.txt']);
-        
-        % Pull the logfile's data
-        [mod2_log_table] = mod_log2tsv(proj,raw_log_data);
-        mod2_log_table    
-        
-        % Transfer table to text file
-        file_name = ['sub-',name,'_task-modulate2_events.tsv'];
-        func_path = [proj.path.data,'sub-',name,'/func/'];
-        writetable(mod2_log_table,fullfile(func_path,file_name),...
-                   'FileType','text','Delimiter','\t');
-
-    end
-
+    % Extract name of Modulate 2
+    cmd = ['! sed -n ''2{p;q}'' ',tmp_path,subj_study,'_',name,...
+           '_log_list.txt > ',tmp_path,'modulate_2_logfile.txt'];
+    disp(cmd);
+    eval(cmd);
+    
+    fid = fopen([tmp_path,'modulate_2_logfile.txt'],'r');
+    filename = fscanf(fid,'%s');
+    fclose(fid);
+    
+    % Read the correct logfile
+    cmd = ['! tail ',filename,' -n +2 > ',tmp_path,'modulate_2_log.txt'];
+    disp(cmd);
+    eval(cmd);
+    raw_log_data = csvread([tmp_path,'modulate_2_log.txt']);
+    
+    % Pull the logfile's data
+    [mod2_log_table] = mod_log2tsv(proj,raw_log_data);
+    mod2_log_table    
+    
+    % Transfer table to text file
+    file_name = ['sub-',name,'_task-modulate2_events.tsv'];
+    func_path = [proj.path.data,'sub-',name,'/func/'];
+    writetable(mod2_log_table,fullfile(func_path,file_name),...
+               'FileType','text','Delimiter','\t');
+    
     % Clean-up
     eval(['! rm ',tmp_path,'*']);
 

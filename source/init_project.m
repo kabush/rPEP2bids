@@ -30,6 +30,7 @@ proj.flag.clean_build = 1;
 
 %% Raw data
 proj.path.raw_data = '/raw/cisler/';
+proj.path.raw_data_demo = '/raw/bush/';
 proj.path.raw_cog = [proj.path.raw_data,'cogbehav/'];
 proj.path.raw_physio = 'physio';
 proj.path.hr = [proj.path.raw_data,'kubios/']; 

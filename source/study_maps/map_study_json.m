@@ -43,12 +43,6 @@ disp(cmd);
 eval(cmd);
  
 %% ----------------------------------------
-%% Rest bold json
-cmd = ['! cp ',proj.path.template,'task-rest_bold.json ',proj.path.data];
-disp(cmd);
-eval(cmd);
-
-%% ----------------------------------------
 %% Modulate bold json
 cmd = ['! cp ',proj.path.template,'task-modulate_bold.json ',proj.path.data,...
       'task-modulate1_bold.json'];

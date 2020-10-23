@@ -32,11 +32,9 @@ for i=1:numel(subjs)
     if(str2num(name)<25)
         pre_name = '_SENSE';
     end
-    disp(pre_name)
 
     %% debug
     logger([subj_study,':',name],proj.path.logfile);
-
 
     %% ----------------------------------------
     %% Adjust for scan numbering change (???)
@@ -57,7 +55,6 @@ for i=1:numel(subjs)
             start_num = 5;
         end
     end
-    disp(start_num)
 
     %% ----------------------------------------
     %% Adjust name of study for typo
@@ -123,34 +120,30 @@ for i=1:numel(subjs)
     disp(cmd);
     eval(cmd);
 
-    % copy raw modulata 1B (and rename)
-    cmd = ['! cp ',proj.path.raw_data,proj.path.data_name,'/',subj_study,'_',name,'/',...
-           subj_study_file,'_',name,'_modulate_B',pre_name,'_',num2str(start_num+3),'_1.nii ',func_path,...
-           'sub-',name,'_task-modulate2_bold.nii'];
-    disp(cmd);
-    eval(cmd);
+    if(strcmp(name,'006') ~= 0 | strcmp(name,'028') ~=0 )
 
-    % *** ONLY EXISTS FOR FIRST TWO SUBJECTS - SWITCHED TO 2 MODS ***
-    % % copy raw modulata 2A (and rename)
-    % cmd = ['! cp ',proj.path.raw_data,proj.path.data_name,'/',subj_study,'_',name,'/',...
-    %        subj_study,'_',name,'_modulate_A',pre_name,'_',num2str(start_num+4),'_1.nii ',func_path,...
-    %        'sub-',name,'_task-modulate3_bold.nii'];
-    % disp(cmd);
-    % eval(cmd);
-    % 
-    % % copy raw modulata 2B (and rename)
-    % cmd = ['! cp ',proj.path.raw_data,proj.path.data_name,'/',subj_study,'_',name,'/',...
-    %        subj_study,'_',name,'_modulate_B',pre_name,'_',num2str(start_num+5),'_1.nii ',func_path,...
-    %        'sub-',name,'_task-modulate4_bold.nii'];
-    % disp(cmd);
-    % eval(cmd);
+        % copy raw modulata 1B (and rename)
+        cmd = ['! cp ',proj.path.raw_data,proj.path.data_name,'/',subj_study,'_',name,'/',...
+               subj_study_file,'_',name,'_modulate_B',pre_name,'_',num2str(start_num+4),'_1.nii ',func_path,...
+               'sub-',name,'_task-modulate2_bold.nii'];
+        disp(cmd);
+        eval(cmd);
 
+    else
+        % copy raw modulata 1B (and rename)
+        cmd = ['! cp ',proj.path.raw_data,proj.path.data_name,'/',subj_study,'_',name,'/',...
+               subj_study_file,'_',name,'_modulate_B',pre_name,'_',num2str(start_num+3),'_1.nii ',func_path,...
+               'sub-',name,'_task-modulate2_bold.nii'];
+        disp(cmd);
+        eval(cmd);
+
+    end
+
+    %% logger('*** TICKET **** uncomment before using for real!',proj.path.logfile);
     
-    % logger('*** TICKET **** uncomment before using for real!',proj.path.logfile);
-    % 
-    % % gzip all files
-    % cmd = ['! gzip ',func_path,'*'];
-    % disp(cmd);
-    % eval(cmd);    
+    % gzip all files
+    cmd = ['! gzip ',func_path,'*'];
+    disp(cmd);
+    eval(cmd);    
 
 end

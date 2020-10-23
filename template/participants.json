@@ -13,7 +13,8 @@
 	"group": {
 		"Description":"condition of the subject",
 			"Levels": {
-				"control":"healthy subject"
+				"control":"healthy subject",
+			        "ptsd":"ptsd subject"
 			}
 		}
 }

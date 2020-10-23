@@ -60,33 +60,31 @@ for i=1:numel(subjs)
     disp(cmd);
     eval(cmd);
 
+    %% ----------------------------------------
+    %% map functional physio (func directory)
+
+    % copy raw identify 1 (and rename)
+    cmd = ['! cp ',proj.path.template,'task-identify_physio.json ',...
+           func_path,'sub-',name,'_task-identify1_physio.json'];
+    disp(cmd);
+    eval(cmd);
+
+    % copy raw identify 2 (and rename)
+    cmd = ['! cp ',proj.path.template,'task-identify_physio.json ',...
+           func_path,'sub-',name,'_task-identify2_physio.json'];
+    disp(cmd);
+    eval(cmd);
+
+    % copy raw modulate1 (and rename)
+    cmd = ['! cp ',proj.path.template,'task-modulate_physio.json ',...
+           func_path,'sub-',name,'_task-modulate1_physio.json'];
+    disp(cmd);
+    eval(cmd);
+
+    % copy raw modulate2 (and rename)
+    cmd = ['! cp ',proj.path.template,'task-modulate_physio.json ',...
+           func_path,'sub-',name,'_task-modulate2_physio.json'];
+    disp(cmd);
+    eval(cmd);
+
 end
-
-%     %% ----------------------------------------
-%     %% map functional physio (func directory)
-% 
-%     % copy raw identify 1 (and rename)
-%     cmd = ['! cp ',proj.path.template,'task-identify_physio.json ',...
-%            func_path,'sub-',name,'_task-identify1_physio.json'];
-%     disp(cmd);
-%     eval(cmd);
-% 
-%     % copy raw identify 2 (and rename)
-%     cmd = ['! cp ',proj.path.template,'task-identify_physio.json ',...
-%            func_path,'sub-',name,'_task-identify2_physio.json'];
-%     disp(cmd);
-%     eval(cmd);
-% 
-%     % copy raw modulate1 (and rename)
-%     cmd = ['! cp ',proj.path.template,'task-modulate_physio.json ',...
-%            func_path,'sub-',name,'_task-modulate1_physio.json'];
-%     disp(cmd);
-%     eval(cmd);
-% 
-%     % copy raw modulate2 (and rename)
-%     cmd = ['! cp ',proj.path.template,'task-modulate_physio.json ',...
-%            func_path,'sub-',name,'_task-modulate2_physio.json'];
-%     disp(cmd);
-%     eval(cmd);
-
-

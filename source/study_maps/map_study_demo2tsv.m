@@ -37,20 +37,20 @@ for i = 1:numel(subjs)
 
     %% debug
     logger([subj_study,':',name],proj.path.logfile);
-
+    
     try
 
         %% Load subject's sex
-        demo = readtable([proj.path.raw_data,proj.path.demo,'/',subj_study,'.csv']);
+        demo = readtable([proj.path.raw_data_demo,proj.path.demo,'/',subj_study,'.csv']);
         id = find(strcmp(demo.ID,name)~=0);
         participant_id{i} = name;
         age{i} = demo.Age(id);
-        if(demo.Type(id)==1)
+        if(demo.Sex(id)==1)
             sex{i} = 'M';
         else
             sex{i} = 'F';
         end
-        group{i} = 'control';
+        group{i} = demo.Type{id};
 
     catch 
         disp(['  Error: could not load file(s)']);

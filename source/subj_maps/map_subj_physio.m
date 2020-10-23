@@ -35,7 +35,6 @@ for i=1:numel(subjs)
     % build and write tables
     physio_mat2tsv(proj,subj_study,name,'Identify',1);
     physio_mat2tsv(proj,subj_study,name,'Identify',2);
-    physio_mat2tsv(proj,subj_study,name,'Rest');
     physio_mat2tsv(proj,subj_study,name,'Modulate',1);
     physio_mat2tsv(proj,subj_study,name,'Modulate',2);
 

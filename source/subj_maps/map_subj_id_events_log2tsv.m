@@ -22,7 +22,6 @@ subjs = load_subjs(proj);
 for i=1:numel(subjs)
 
     %%  Assign file paths
-    design_path = proj.path.design;  %raw design
     log_path = proj.path.log;  %log
     tmp_path = [proj.path.code,'tmp/'];
     
@@ -35,10 +34,7 @@ for i=1:numel(subjs)
 
     %% ----------------------------------------
     %% Pull Identify 1 log data below
-    
-    %% % Load in design files
-    %% load([design_path,'run1_design.mat']);
-    
+        
     % Creat a list of log files for study and subject
     cmd = ['! ls ',proj.path.raw_data,subj_study,'/logfile/', ...
            subj_study,'_',name,'/logfile_collection*.log > ',tmp_path,subj_study,'_', ...
@@ -80,9 +76,6 @@ for i=1:numel(subjs)
     %% ----------------------------------------
     %% Pull Identify 2 log data below
     
-    % Load in design files
-    load([design_path,'run2_design.mat']);
-
     % Creat a list of log files for study and subject
     cmd = ['! ls ',proj.path.raw_data,subj_study,'/logfile/', ...
            subj_study,'_',name,'/logfile_collection*.log > ',tmp_path,subj_study,'_', ...
@@ -116,7 +109,6 @@ for i=1:numel(subjs)
     func_path = [proj.path.data,'sub-',name,'/func/'];
     writetable(id2_log_table,fullfile(func_path,file_name),...
                'FileType','text','Delimiter','\t');
-
 
     % Clean-up
     eval(['! rm ',tmp_path,'*']);
