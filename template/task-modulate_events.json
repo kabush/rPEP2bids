@@ -3,5 +3,6 @@
     "duration": "true duration time of the event (approximated)",
     "dsgn_onset": "The designed onset time of the event",
     "dsgn_duration": "The designed duration time of the event",
-    "trial_type": "event type"
+    "trial_type": "event type",
+    "feedback": "alpha value text of script presented to the screen [0=transparent,1=opaque]"
 }
