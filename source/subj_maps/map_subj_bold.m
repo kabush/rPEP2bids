@@ -81,12 +81,12 @@ for i=1:numel(subjs)
     disp(cmd);
     eval(cmd);
 
-    % do without deface for now
-    cmd = ['! cp ',proj.path.raw_data,proj.path.data_name,'/',...
-           subj_study,'_',name,'/',subj_study_file,'_',name,'_sT1W*.nii ',...
-           anat_path,'sub-',name,'_T1w.nii'];
-    disp(cmd);
-    eval(cmd);
+    % % do without deface for now
+    % cmd = ['! cp ',proj.path.raw_data,proj.path.data_name,'/',...
+    %        subj_study,'_',name,'/',subj_study_file,'_',name,'_sT1W*.nii ',...
+    %        anat_path,'sub-',name,'_T1w.nii'];
+    % disp(cmd);
+    % eval(cmd);
 
     % gzip
     cmd = ['! gzip ',anat_path,'sub-',name,'_T1w.nii'];
