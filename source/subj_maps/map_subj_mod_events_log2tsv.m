@@ -61,7 +61,7 @@ for i = 1:numel(subjs)
 
     % Pull the logfile's data
     [mod1_log_table] = mod_log2tsv(proj,raw_log_data);
-    mod1_log_table
+    % mod1_log_table
 
     % Transfer table to text file
     file_name = ['sub-',name,'_task-modulate1_events.tsv'];
@@ -99,7 +99,7 @@ for i = 1:numel(subjs)
     
     % Pull the logfile's data
     [mod2_log_table] = mod_log2tsv(proj,raw_log_data);
-    mod2_log_table    
+    % mod2_log_table    
     
     % Transfer table to text file
     file_name = ['sub-',name,'_task-modulate2_events.tsv'];

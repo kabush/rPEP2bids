@@ -71,12 +71,6 @@ disp(cmd);
 eval(cmd);
  
 %% ----------------------------------------
-%% Rest physio json
-cmd = ['! cp ',proj.path.template,'task-rest_physio.json ',proj.path.data];
-disp(cmd);
-eval(cmd);
-
-%% ----------------------------------------
 %% Modulate physio json
 cmd = ['! cp ',proj.path.template,'task-modulate_physio.json ',proj.path.data,...
       'task-modulate1_physio.json'];

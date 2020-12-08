@@ -18,8 +18,22 @@ if(strcmp(task,'Rest'))
     file_path = [proj.path.raw_data,subj_study,'/physio/',subj_study,'_',name,'/',...
                  subj_study,'_',name,'_',task,'.mat'];
 else
-    file_path = [proj.path.raw_data,subj_study,'/physio/',subj_study,'_',name,'/',...
-                 subj_study,'_',name,'_',task,'_run_',num2str(run_id),'.mat'];
+
+    if(strcmp(name,'027') ~=0 || strcmp(name,'028') ~=0 || strcmp(name,'030') ~=0)
+        file_path = [proj.path.raw_data,subj_study,'/physio/',subj_study,'_',name,'/',...
+                     subj_study,'_',name,'_',task,'_run_',num2str(run_id),'.mat'];
+    else
+        if(strcmp(task,'Identify')~=0)
+            file_path = [proj.path.raw_data,subj_study,'/physio/',subj_study,'_',name,'/',...
+                         subj_study,'_',name,'_run',num2str(run_id),'_acquisition.mat'];
+        end
+
+        if(strcmp(task,'Modulate')~=0)
+            file_path = [proj.path.raw_data,subj_study,'/physio/',subj_study,'_',name,'/',...
+                         subj_study,'_',name,'_run',num2str(run_id),'_modulation.mat'];
+        end
+    end
+
 end
 
 disp(file_path);

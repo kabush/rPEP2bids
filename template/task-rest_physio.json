@@ -1,6 +1,0 @@
-{
-	"SamplingFrequency": 2000.0,
-   "StartTime": 0.0,
-   "Columns": ["cardiac","respiratory","scr"],
-	"TaskName": "rest"
-}

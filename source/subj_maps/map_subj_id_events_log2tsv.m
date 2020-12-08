@@ -60,7 +60,7 @@ for i=1:numel(subjs)
     
     % Pull the logfile's data
     [id1_log_table] = id_log2tsv(proj,raw_log_data,1);
-    id1_log_table
+    % id1_log_table
 
     % Transfer table to text file
     file_name = ['sub-',name,'_task-identify1_events.tsv'];
@@ -102,7 +102,7 @@ for i=1:numel(subjs)
     
     % Pull the logfile's data
     [id2_log_table] = id_log2tsv(proj,raw_log_data,2);
-    id2_log_table    
+    % id2_log_table    
 
     % Transfer table to text file
     file_name = ['sub-',name,'_task-identify2_events.tsv'];

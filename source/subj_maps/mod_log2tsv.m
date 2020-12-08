@@ -126,7 +126,7 @@ for i=1:numel(all_onsets)
     duration{i} = sprintf('%5.3f',cell_dur_t{i});
     dsgn_onset{i} = sprintf('%5.1f',all_vols{i}*TR);
     dsgn_duration{i} = sprintf('%5.1f',cell_dsgn_dur_t{i});
-    feedback{i} = sprintf('%5.3f',all_fbs{i})
+    feedback{i} = sprintf('%5.3f',all_fbs{i});
 end
 trial_type = all_types;
 

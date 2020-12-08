@@ -68,7 +68,6 @@ proj.path.logfile = [proj.path.log,'logfile_',ds,'.txt'];
 %% Task file nomenclature
 proj.path.task.name_id1 = 'Identify_run_1';
 proj.path.task.name_id2 = 'Identify_run_2';
-proj.path.task.name_rest = 'Rest';
 
 %% ----------------------------------------
 %% Project Parameter Definitions
