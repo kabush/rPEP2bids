@@ -120,7 +120,7 @@ for i=1:numel(subjs)
     disp(cmd);
     eval(cmd);
 
-    if(strcmp(name,'006') ~= 0 | strcmp(name,'028') ~=0 )
+    if(strcmp(name,'028') ~=0 )
 
         % copy raw modulata 1B (and rename)
         cmd = ['! cp ',proj.path.raw_data,proj.path.data_name,'/',subj_study,'_',name,'/',...
