@@ -1,7 +1,17 @@
 {
-    "onset": "true onset time of the event",
-    "duration": "true duration time of the event (approximated)",
-    "dsgn_onset": "The designed onset time of the event",
-    "dsgn_duration": "The designed duration time of the event",
-    "trial_type": "event type"
+    "onset": {
+        "Description": "true onset time of the event"
+	 },
+    "duration": {
+	     "Description": "true duration time of the event (approximated)"
+    },
+    "dsgn_onset": {
+	     "Description": "The designed onset time of the event"
+	 },
+    "dsgn_duration": {
+        "Description": "The designed duration time of the event"
+	 }, 
+    "trial_type": {
+	     "Description": "event type"
+    }
 }

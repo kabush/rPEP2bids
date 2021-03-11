@@ -1,8 +1,24 @@
 {
-    "onset": "true onset time of the event",
-    "duration": "true duration time of the event (approximated)",
-    "dsgn_onset": "The designed onset time of the event",
-    "dsgn_duration": "The designed duration time of the event",
-    "trial_type": "event type",
-    "feedback": "alpha value text of script presented to the screen [0=transparent,1=opaque]"
+    "onset": {
+        "Description": "true onset time of the event"
+	 },
+    "duration": {
+	     "Description": "true duration time of the event (approximated)"
+    },
+    "dsgn_onset": {
+	     "Description": "The designed onset time of the event"
+	 },
+    "dsgn_duration": {
+        "Description": "The designed duration time of the event"
+	 }, 
+    "trial_type": {
+	     "Description": "event type"
+    },
+    "feedback": {
+	     "Description": "hyperplane distance from real-time SVM"
+    },
+    "transparency": {
+	     "Description": "alpha value text of script presented to the screen [0=transparent,1=opaque]"
+    }
+
 }

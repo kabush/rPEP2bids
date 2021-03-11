@@ -18,12 +18,14 @@ TR = 2.0;
 curr_state = data(1,3);
 curr_onset = data(1,9);
 curr_vol = data(1,2);
-curr_fb = data(1,8);
+curr_fb = data(1,4);
+curr_trans = data(1,8)
 
 cnt = 1;
 all_onsets{cnt} = curr_onset;
 all_vols{cnt} = curr_vol;
 all_fbs{cnt} = curr_fb;
+all_trans{cnt} = curr_trans;
 all_types{cnt} = 'stims_rst';
 
 convert_type = 0;
@@ -36,16 +38,18 @@ for i=2:size(data,1)
         curr_onset = data(i,9);
         curr_vol = data(i,2);
         curr_fb = 0.0;
+        curr_trans = 0.0;
         cnt = cnt + 1;
         convert_type = 1;
         
     else
 
-        if(curr_state==65 | curr_state==70)
+        if(curr_state==65 | curr_state==70 | curr_state==75 | curr_state==80)
 
             curr_onset = data(i,9);
             curr_vol = data(i,2);
-            curr_fb = data(i,8);
+            curr_fb = data(i,4); % true fb from tabs
+            curr_trans = data(i,8);
             cnt = cnt + 1;
             convert_type = 1;
         
@@ -56,6 +60,7 @@ for i=2:size(data,1)
     all_onsets{cnt} = curr_onset;
     all_vols{cnt} = curr_vol;
     all_fbs{cnt} = curr_fb;
+    all_trans{cnt} = curr_trans;
 
     if(convert_type)
 
@@ -127,6 +132,7 @@ for i=1:numel(all_onsets)
     dsgn_onset{i} = sprintf('%5.1f',all_vols{i}*TR);
     dsgn_duration{i} = sprintf('%5.1f',cell_dsgn_dur_t{i});
     feedback{i} = sprintf('%5.3f',all_fbs{i});
+    transparency{i} = sprintf('%5.3f',all_trans{i});
 end
 trial_type = all_types;
 
@@ -135,6 +141,7 @@ duration = duration';
 dsgn_onset = dsgn_onset';
 dsgn_duration = dsgn_duration';
 feedback = feedback';
+transparency = transparency';
 
 trial_type = trial_type';
 
@@ -143,4 +150,5 @@ log_table = table(onset,...
                   dsgn_onset,...
                   dsgn_duration,...
                   trial_type,...
-                  feedback);
+                  feedback,...
+                  transparency);
