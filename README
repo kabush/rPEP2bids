@@ -1,11 +1,82 @@
 # ========================================
 # ========================================
-# Keith Bush, PhD (2020)
+# Keith Bush, PhD (2021)
 # Univ. of Arkansas for Medical Sciences
 # Brain Imaging Research Center (BIRC)
 # ========================================
 # ========================================
       
+# ----------------------------------------
+# ----------------------------------------
+    OVERVIEW: 
+# ----------------------------------------
+# ----------------------------------------
 
+This project maps raw data files to BIDS format for the "Real-time
+fMRI and Neurofeedback of Brain Networks Mediating Trauma Memory
+Recall in PTSD (rPEP)" study funded by the Arkansas Science and 
+Technology Authority (ASTA) award number: 15-B-3
 
+# ----------------------------------------
+# ----------------------------------------
+    DATA SOURCES:
+# ----------------------------------------
+# ----------------------------------------
 
+Raw data not released. 
+
+# ----------------------------------------
+# ----------------------------------------
+    PROJECT OVERVIEW:
+# ----------------------------------------
+# ----------------------------------------
+
+/rPEP2bids
+    run_project.m  # the master script which sequentially
+    		   # calls all supporting scripts.  If the
+		   # project executes correctly then the 
+		   # log directory will contain a textual
+		   # description of all important setps
+		   # recorded by script execution.
+
+    matlab_reset.m # clears the workspace and resets matlab's
+                   # path to the initial launch state
+
+    /source
+        init_project.m  # all project parameters
+
+    	clean_project.m # wipes the directory storing
+	 		# intermediate files
+        /study_maps
+	    # scripts to map study level BIDS data and 
+            # json sidecar files
+
+        /subj_maps
+	    # scripts to map individual subject level
+            # data (BOLD, physio, events) and 
+            # json sidecare files
+
+    /subj_lists
+        # stores text files listing the included
+	# subjects for each study being used in
+	# this project analysis
+
+    /template
+        # contains default *.json templates
+        # copied to conform to the BIDS standard
+
+# ----------------------------------------
+# ----------------------------------------
+    REQUIRED TOOLS
+# ----------------------------------------
+# ----------------------------------------
+
+matlab (Tested only for R2016B)
+    - statistical analysis toolbox
+    - parallel computing toolbox
+
+pydeface
+    - https://github.com/poldracklab/pydeface
+
+gzip
+      
